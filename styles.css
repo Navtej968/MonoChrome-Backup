@@ -3342,42 +3342,7 @@ img:not([src]), img[src=''] {
     filter: brightness(1.1);
 }
 
-/* Firebase Settings Styling */
-.firebase-settings-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
-    max-width: 400px;
-}
-
-.custom-firebase-config {
-    display: none;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    width: 100%;
-}
-
-.custom-firebase-config.visible {
-    display: flex;
-}
-
-.config-help-text {
-    font-size: 0.8rem;
-    opacity: 0.7;
-    margin-bottom: 0.25rem;
-}
-
-.firebase-controls-container {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-}
-
-#toggle-firebase-config-btn {
-    width: fit-content;
-}
+/* Firebase styles removed (sync disabled) */
 
 .account-content {
     padding: 1rem 0;

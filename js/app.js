@@ -813,7 +813,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }, 3000);
     }
 
-    // Listener for Firebase Sync updates
+    // Listener for library updates (cloud sync disabled)
     window.addEventListener('library-changed', () => {
         const hash = window.location.hash;
         if (hash === '#library') {

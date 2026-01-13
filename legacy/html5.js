@@ -45,12 +45,12 @@ $(document).ready(function () {
                   }
               };
           }
-      });
+         });
   }
   // REMOVED: $.support.cors = true; 
   // We MUST NOT set this for IE9. If we do, jQuery tries to use standard XHR for cross-domain, 
   // which fails ("Access is denied"). Leaving it false forces jQuery to use our custom XDR transport.
-
+  var apiBaseUrl = ""
   var apiInstances = [];
   var currentInstanceIndex = 0;
   var isHttpFallback = false;

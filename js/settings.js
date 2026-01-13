@@ -1,78 +1,9 @@
 //js/settings
 import { themeManager, lastFMStorage, nowPlayingSettings, lyricsSettings, backgroundSettings, trackListSettings, cardSettings } from './storage.js';
 import { db } from './db.js';
-import { authManager } from './firebase/auth.js';
-import { syncManager } from './firebase/sync.js';
-import { initializeFirebaseSettingsUI } from './firebase/config.js';
 
 export function initializeSettings(scrobbler, player, api, ui) {
-    // Initialize Firebase UI & Settings
-    authManager.updateUI(authManager.user);
-    initializeFirebaseSettingsUI();
-
-    // Email Auth UI Logic
-    const toggleEmailBtn = document.getElementById('toggle-email-auth-btn');
-    const cancelEmailBtn = document.getElementById('cancel-email-auth-btn');
-    const authContainer = document.getElementById('email-auth-container');
-    const authButtonsContainer = document.getElementById('auth-buttons-container');
-    const emailInput = document.getElementById('auth-email');
-    const passwordInput = document.getElementById('auth-password');
-    const signInBtn = document.getElementById('email-signin-btn');
-    const signUpBtn = document.getElementById('email-signup-btn');
-
-    if (toggleEmailBtn && authContainer && authButtonsContainer) {
-        toggleEmailBtn.addEventListener('click', () => {
-            authContainer.style.display = 'flex';
-            authButtonsContainer.style.display = 'none';
-        });
-    }
-
-    if (cancelEmailBtn && authContainer && authButtonsContainer) {
-        cancelEmailBtn.addEventListener('click', () => {
-            authContainer.style.display = 'none';
-            authButtonsContainer.style.display = 'flex';
-        });
-    }
-
-    if (signInBtn) {
-        signInBtn.addEventListener('click', async () => {
-            const email = emailInput.value;
-            const password = passwordInput.value;
-            if (!email || !password) {
-                alert('Please enter both email and password.');
-                return;
-            }
-            try {
-                await authManager.signInWithEmail(email, password);
-                authContainer.style.display = 'none';
-                authButtonsContainer.style.display = 'flex';
-                emailInput.value = '';
-                passwordInput.value = '';
-            } catch (e) {
-                // Error handled in authManager
-            }
-        });
-    }
-
-    if (signUpBtn) {
-        signUpBtn.addEventListener('click', async () => {
-            const email = emailInput.value;
-            const password = passwordInput.value;
-            if (!email || !password) {
-                alert('Please enter both email and password.');
-                return;
-            }
-            try {
-                await authManager.signUpWithEmail(email, password);
-                authContainer.style.display = 'none';
-                authButtonsContainer.style.display = 'flex';
-                emailInput.value = '';
-                passwordInput.value = '';
-            } catch (e) {
-                 // Error handled in authManager
-            }
-        });
-    }
+    // Firebase authentication UI removed
 
     const lastfmConnectBtn = document.getElementById('lastfm-connect-btn');
     const lastfmStatus = document.getElementById('lastfm-status');
@@ -391,18 +322,7 @@ export function initializeSettings(scrobbler, player, api, ui) {
         }
     });
 
-    document.getElementById('firebase-clear-cloud-btn')?.addEventListener('click', async () => {
-        if (confirm('Are you sure you want to delete ALL your data from the cloud? This cannot be undone.')) {
-            try {
-                await syncManager.clearCloudData();
-                alert('Cloud data cleared successfully.');
-                authManager.signOut();
-            } catch (error) {
-                console.error('Failed to clear cloud data:', error);
-                alert('Failed to clear cloud data: ' + error.message);
-            }
-        }
-    });
+    // Firebase cloud-clear functionality removed
 
     // Backup & Restore
     document.getElementById('export-library-btn')?.addEventListener('click', async () => {
